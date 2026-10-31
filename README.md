@@ -3,7 +3,7 @@
 Prebuilt kernel, DTB, DTBO and vendor modules for `device/nothing/Pong` with
 `TARGET_PONG_KERNEL := 6.18` (the default on its `pong-6.18` branch).
 
-The files are the tested development image set named in `source.json` (currently CLS36:
+The files are the tested development image set named in `source.json` (currently CLS38:
 kernel from the Kleaf build of
 [android_kernel_nothing_sm8475-6.18](https://github.com/Szmazwidi/android_kernel_nothing_sm8475-6.18)
 and modules from
@@ -28,5 +28,5 @@ build with it on another device; see `README.pong.md` of the kernel repository.
 Update from another tested stage:
 
 ```sh
-./import-pong618.py /mnt/storage/5.15/pong618/diagnostics CLS36
+./import-pong618.py /mnt/storage/5.15/pong618/diagnostics CLS38
 ```
