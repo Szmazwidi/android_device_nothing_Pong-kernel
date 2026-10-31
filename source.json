@@ -1,13 +1,13 @@
 {
-  "stage": "CLS36",
+  "stage": "CLS38",
   "kernel": {
-    "file": "/mnt/storage/5.15/pong618/diagnostics/stageCLS36-kernel/kernel/Image",
-    "sha256": "30a05dfebb68377db2e0c6652c86d6cf7803ff9e1cade0a762395ffc58bc0c5a"
+    "file": "/mnt/storage/5.15/pong618/diagnostics/stageCLS38-kernel/kernel/Image",
+    "sha256": "08ef4880dc37e71aabacc7173185b36661c3fa1eba93eced0aee8287166835c3"
   },
-  "boot_b": "77dfa0a93c674c6e477b27a7b8f572f56abbf7ddd147e64a2bd6300fbfba450b",
+  "boot_b": "4ef756b4e807f28cc4a94d57f2670aa6161ab588fc37b0f14f28e0bf73d26307",
   "vendor_boot_b": "2353bc2db75cc62e05c0765fab139ee6231cec7ebb1f825c5f991c67f813ed0d",
   "dtbo_b": "4fd6034c192cad4804b98e2f884cc5cfadf68c8a010d1065ab07901e3e3faeee",
-  "vendor_dlkm_b": "d0c7014ab4bfd25076b5bcdfa89e67d0768b3ad32b3aca0bde2ea41df5b7fba2",
+  "vendor_dlkm_b": "0926d1d52e4cb2ca30c79c75c4abc70fdcadc5eaa3f244cf1e60fff7f9f400fe",
   "modules": 262,
   "vendor_boot_modules": 94
 }
