@@ -1,0 +1,13 @@
+{
+  "stage": "CLS36",
+  "kernel": {
+    "file": "/mnt/storage/5.15/pong618/diagnostics/stageCLS36-kernel/kernel/Image",
+    "sha256": "30a05dfebb68377db2e0c6652c86d6cf7803ff9e1cade0a762395ffc58bc0c5a"
+  },
+  "boot_b": "77dfa0a93c674c6e477b27a7b8f572f56abbf7ddd147e64a2bd6300fbfba450b",
+  "vendor_boot_b": "2353bc2db75cc62e05c0765fab139ee6231cec7ebb1f825c5f991c67f813ed0d",
+  "dtbo_b": "4fd6034c192cad4804b98e2f884cc5cfadf68c8a010d1065ab07901e3e3faeee",
+  "vendor_dlkm_b": "d0c7014ab4bfd25076b5bcdfa89e67d0768b3ad32b3aca0bde2ea41df5b7fba2",
+  "modules": 262,
+  "vendor_boot_modules": 94
+}
