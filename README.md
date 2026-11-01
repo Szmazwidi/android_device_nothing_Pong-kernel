@@ -3,23 +3,21 @@
 Prebuilt kernel, DTB, DTBO and vendor modules for `device/nothing/Pong` with
 `TARGET_PONG_KERNEL := 6.18` (the default on its `pong-6.18` branch).
 
-The files are the tested development image set named in `source.json` (currently CLS38:
-kernel from the Kleaf build of
-[android_kernel_nothing_sm8475-6.18](https://github.com/Szmazwidi/android_kernel_nothing_sm8475-6.18)
-and modules from
-[android_kernel_nothing_sm8475-modules-6.18](https://github.com/Szmazwidi/android_kernel_nothing_sm8475-modules-6.18),
-branch `pong-a17-6.18.59`). `SHA256SUMS` lists every file.
+The source-built 6.18.60 cohort described in `source.json` was imported after
+host validation of the full signed bank. On the development phone, the exact
+Image and module cohort booted Android with SELinux enforcing and signature
+checking forced; a data-interface-bound ping and three NDK camera preview/JPEG
+probes passed. The importer itself records `hardware_tested: false` because it
+performs no phone operation. This limited device result does not qualify every
+feature or another handset. See the source modules repository's runtime report
+for the remaining kernel warnings and userspace crashes.
 
-**This is the development kernel of one phone.** It keeps the laboratory guards of that
-kernel: block writes are allowed only to the userdata/metadata ranges of the development
-phone's UFS, and only the listed exact module payloads load. The supplied modules
-are signed. The historical CLS38 Image does not itself default to signature
-forcing (`module.sig_enforce=N`); the payload hash gate is a separate check.
-The newer source configuration enables signature forcing and SHA-256 for fresh
-builds, which require their own frozen module set/key and separate qualification.
-This repository retains the previously tested Image until that replacement is
-qualified. Do not flash a build with it on another device; see `README.pong.md`
-of the kernel repository.
+**This is the development kernel of one phone.** It retains laboratory guards
+whose block-write ranges and RAM geometry are specific to that phone; another
+Phone (2) may have a different layout. Do not flash this prebuilt on another
+phone without reviewing and adapting those guards. The 262 supplied modules
+are signed, signature enforcement is enabled, and the exact-payload gate is a
+separate check. See `README.pong.md` in the kernel source repository.
 
 | File | Contents |
 |---|---|

@@ -1,13 +1,25 @@
 {
-  "stage": "CLS38",
+  "schema": "pong-source-prebuilt-v1",
+  "status": "SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED",
   "kernel": {
-    "file": "/mnt/storage/5.15/pong618/diagnostics/stageCLS38-kernel/kernel/Image",
-    "sha256": "08ef4880dc37e71aabacc7173185b36661c3fa1eba93eced0aee8287166835c3"
+    "sha256": "4dfc70bbbbd84f52e8bbab2ebca94588a3c75007bcbcad87ba21af3d59d773a6"
   },
-  "boot_b": "4ef756b4e807f28cc4a94d57f2670aa6161ab588fc37b0f14f28e0bf73d26307",
-  "vendor_boot_b": "2353bc2db75cc62e05c0765fab139ee6231cec7ebb1f825c5f991c67f813ed0d",
-  "dtbo_b": "4fd6034c192cad4804b98e2f884cc5cfadf68c8a010d1065ab07901e3e3faeee",
-  "vendor_dlkm_b": "0926d1d52e4cb2ca30c79c75c4abc70fdcadc5eaa3f244cf1e60fff7f9f400fe",
+  "certificate_sha256": "4a45d8f1c0081c512d366a3d89594a1a7d537b6b3112bae31fee22abb11135be",
   "modules": 262,
-  "vendor_boot_modules": 94
+  "vendor_boot_modules": 94,
+  "signature_force": true,
+  "hardware_tested": false,
+  "phone_operations": 0,
+  "preserved_files": {
+    "dtb/pong.dtb": "1c0406c6a47adb196b2136a9179917430611491d82e5a84ee577436240a118ed",
+    "dtbo.img": "4fd6034c192cad4804b98e2f884cc5cfadf68c8a010d1065ab07901e3e3faeee",
+    "modules.load": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
+    "modules.load.vendor_boot": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
+    "modules.load.recovery": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
+    "modules.list.vendor_boot": "39dfb21cf8d0e6a7a026bb0f00934fe092583445992733084ce569276b807f1a",
+    "modules.options": "082c058dd7ef254eab9fcbee0edc2fae3efca10aee91288a72afa3395e035b82",
+    "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
+  },
+  "signed_manifest_sha256": "6a89f3987fdb0cec4bfe101d61e77567c873f4d9047361f55bb36ae4f9a18e86",
+  "frozen_manifest_sha256": "e85c8492954b66260265fba9e0aebae1a50118b8b2bcf2fdf964ed3743b76ebf"
 }
