@@ -36,3 +36,31 @@ Update from another tested stage:
 ```sh
 ./import-pong618.py /mnt/storage/5.15/pong618/diagnostics CLS38
 ```
+
+
+## Import your complete source build
+
+After the companion modules repository's two-pass build, final signatures and
+module-admission VM test, use the portable importer instead of a maintainer's
+numbered stage directories:
+
+```sh
+# Set these to your own completed build and module source checkout.
+PONG_KERNEL_BUILD=/absolute/path/to/source-build
+PONG_MODULE_SOURCE=/absolute/path/to/modules-source
+python3 ./import-source-build.py \
+  --kernel "$PONG_KERNEL_BUILD/kernel-final" \
+  --signed "$PONG_KERNEL_BUILD/signed" --frozen "$PONG_KERNEL_BUILD/frozen" \
+  --reference "$PONG_MODULE_SOURCE/docs/build-reference-6.18.60.json" \
+  --source-tools "$PONG_MODULE_SOURCE/tools" --destination . --check-only
+# Repeat without --check-only to update this clean prebuilt checkout.
+```
+
+It checks all 262 payloads, the final embedded public certificate, every CMS
+signature and final kernel ABI/runtime contracts before overwriting anything.
+The existing qualified DTB, DTBO and module startup lists are preserved. Private
+signing keys are never copied. SHA256SUMS covers the imported binary bank,
+public certificate and provenance. Source scripts are tracked separately in Git.
+The resulting source.json records a host-verified import, with hardware_tested
+false; importing artifacts does not qualify another phone or change a bootloader.
+The physical guard geometry still requires review for the target Phone (2) SKU.
