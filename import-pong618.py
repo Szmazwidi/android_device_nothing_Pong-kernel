@@ -40,7 +40,8 @@ def main():
     boot = pathlib.Path(images['boot_b']['file'])
     vboot = pathlib.Path(images['vendor_boot_b']['file'])
     dtbo = pathlib.Path(images['dtbo_b']['file'])
-    for key, p in [('boot_b', boot), ('vendor_boot_b', vboot), ('dtbo_b', dtbo)]:
+    for key, p in [('boot_b', boot), ('vendor_boot_b', vboot), ('dtbo_b', dtbo),
+                   ('vendor_dlkm_b', pathlib.Path(images['vendor_dlkm_b']['file']))]:
         assert sha(p) == images[key]['sha256'], key
     dlkm = diag / f'stage{stage}-images/dlkm-readback/lib/modules'
     kernel = diag / f'stage{stage}-kernel/kernel/Image'
@@ -71,14 +72,16 @@ def main():
         (HERE / 'modules.options').write_text((dlkm / 'modules.options').read_text())
         (HERE / 'modules.blocklist').write_text((ramdisk / 'modules.blocklist').read_text())
 
-    files = sorted(p for p in HERE.rglob('*') if p.is_file() and '.git' not in p.parts
-                   and p.name not in {'SHA256SUMS', 'README.md', 'import-pong618.py', 'Android.bp'})
-    (HERE / 'SHA256SUMS').write_text(''.join(f'{sha(p)}  {p.relative_to(HERE)}\n' for p in files))
     (HERE / 'source.json').write_text(json.dumps(dict(
         stage=stage, kernel=dict(file=str(kernel), sha256=sha(HERE / 'Image')),
         boot_b=images['boot_b']['sha256'], vendor_boot_b=images['vendor_boot_b']['sha256'],
         dtbo_b=images['dtbo_b']['sha256'], vendor_dlkm_b=images['vendor_dlkm_b']['sha256'],
         modules=len(list((HERE / 'modules').glob('*.ko'))), vendor_boot_modules=len(vb_mods)), indent=2) + '\n')
+
+    # Hash the newly written provenance, not the previous import's source.json.
+    files = sorted(p for p in HERE.rglob('*') if p.is_file() and '.git' not in p.parts
+                   and p.name not in {'SHA256SUMS', 'README.md', 'import-pong618.py', 'Android.bp'})
+    (HERE / 'SHA256SUMS').write_text(''.join(f'{sha(p)}  {p.relative_to(HERE)}\n' for p in files))
     print(f'imported {stage}: {len(files)} files')
 
 

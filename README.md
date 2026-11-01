@@ -12,8 +12,14 @@ branch `pong-a17-6.18.59`). `SHA256SUMS` lists every file.
 
 **This is the development kernel of one phone.** It keeps the laboratory guards of that
 kernel: block writes are allowed only to the userdata/metadata ranges of the development
-phone's UFS, and only the listed module payloads (signed with its key) load. Do not flash a
-build with it on another device; see `README.pong.md` of the kernel repository.
+phone's UFS, and only the listed exact module payloads load. The supplied modules
+are signed. The historical CLS38 Image does not itself default to signature
+forcing (`module.sig_enforce=N`); the payload hash gate is a separate check.
+The newer source configuration enables signature forcing and SHA-256 for fresh
+builds, which require their own frozen module set/key and separate qualification.
+This repository retains the previously tested Image until that replacement is
+qualified. Do not flash a build with it on another device; see `README.pong.md`
+of the kernel repository.
 
 | File | Contents |
 |---|---|
