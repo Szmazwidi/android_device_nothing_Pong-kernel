@@ -92,3 +92,9 @@ rfkill.ko
 cfg80211.ko
 msm_geni_serial.ko
 rtc-pm8xxx.ko
+qcom_llcc_pmu.ko
+qcom-pmu-lib.ko
+dcvs_fp.ko
+qcom-dcvs.ko
+memlat.ko
+bwmon.ko

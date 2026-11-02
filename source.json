@@ -2,24 +2,28 @@
   "schema": "pong-source-prebuilt-v1",
   "status": "SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED",
   "kernel": {
-    "sha256": "a3ed7ff978e163ae20805b577b0345aeef8285c6b0533cd71d088b5366f49ef1"
+    "sha256": "b03008f2fd8a0899dc448c0f4f075334ed4b927b449e2f43e4d58c24f621186d"
   },
-  "certificate_sha256": "f8b636d448f9cf2975e619ccb6fbd99b9693fd8d2c7f6b2878b69e7345139c72",
-  "modules": 262,
-  "vendor_boot_modules": 94,
+  "certificate_sha256": "c047f693360d521f8b6f7d1e2129a50efd6dd5c6ca6e10161a81a474bf350271",
+  "modules": 277,
+  "vendor_boot_modules": 100,
+  "reference": "CLG9_PLUS_QMI1411",
+  "kernel_profile": "lab",
+  "imported_lists": {
+    "modules.load": "2cf3cc023ab53dd552a725bb28dbc59a4a87aec73602775db6fc37a0ad8c39a8",
+    "modules.load.vendor_boot": "668e582d72faa49eaa84f904c651de898dba85d8295beb0d11b846e951e05f3a",
+    "modules.list.vendor_boot": "9f25cdb056b180e257543fa5e97aa97a6e87823677fd54d35f86a45a61ea5356"
+  },
   "signature_force": true,
   "hardware_tested": false,
   "phone_operations": 0,
   "preserved_files": {
     "dtb/pong.dtb": "1c0406c6a47adb196b2136a9179917430611491d82e5a84ee577436240a118ed",
     "dtbo.img": "4fd6034c192cad4804b98e2f884cc5cfadf68c8a010d1065ab07901e3e3faeee",
-    "modules.load": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
-    "modules.load.vendor_boot": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
     "modules.load.recovery": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
-    "modules.list.vendor_boot": "39dfb21cf8d0e6a7a026bb0f00934fe092583445992733084ce569276b807f1a",
     "modules.options": "082c058dd7ef254eab9fcbee0edc2fae3efca10aee91288a72afa3395e035b82",
     "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
   },
-  "signed_manifest_sha256": "f09602db9e8656b864809273f8df2b0cfbabc537ec86f828e61228895269ff2f",
-  "frozen_manifest_sha256": "2a09c8a531c59892f80c6e632d83a8f3c626f7c5708fe72ee514e414b15e57dc"
+  "signed_manifest_sha256": "2726556615bd67d899b632477152be7e13c02369726751297a183f771cc1a7a9",
+  "frozen_manifest_sha256": "df13832cb4ddec590a06173847391a7756c76fca79200b320a250cecdb477f4a"
 }

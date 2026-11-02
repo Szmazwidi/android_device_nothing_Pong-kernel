@@ -1,8 +1,10 @@
 arm_smmu.ko
+bwmon.ko
 cfg80211.ko
 clk-qcom.ko
 clk-rpmh.ko
 cmd-db.ko
+dcvs_fp.ko
 debug-regulator.ko
 dispcc-sm8450.ko
 dwc3-msm.ko
@@ -27,6 +29,7 @@ mdt_loader.ko
 mem_buf.ko
 mem_buf_dev.ko
 mem_buf_msgq.ko
+memlat.ko
 msm_dma_iommu_mapping.ko
 msm_drm.ko
 msm_geni_serial.ko
@@ -50,8 +53,10 @@ pong-return37.ko
 pong70-llcc-consumer.ko
 pong_membuf_heap.ko
 proxy-consumer.ko
+qcom-dcvs.ko
 qcom-ipcc.ko
 qcom-pdc.ko
+qcom-pmu-lib.ko
 qcom-pon-parent68.ko
 qcom-reboot-reason39.ko
 qcom-scm.ko
@@ -64,6 +69,7 @@ qcom_cpucp.ko
 qcom_hwspinlock.ko
 qcom_ice.ko
 qcom_iommu_util.ko
+qcom_llcc_pmu.ko
 qcom_reserved_heaps.ko
 qcom_rpmh.ko
 qcom_tsens.ko
