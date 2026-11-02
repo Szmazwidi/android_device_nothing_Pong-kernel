@@ -2,9 +2,9 @@
   "schema": "pong-source-prebuilt-v1",
   "status": "SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED",
   "kernel": {
-    "sha256": "4dfc70bbbbd84f52e8bbab2ebca94588a3c75007bcbcad87ba21af3d59d773a6"
+    "sha256": "a3ed7ff978e163ae20805b577b0345aeef8285c6b0533cd71d088b5366f49ef1"
   },
-  "certificate_sha256": "4a45d8f1c0081c512d366a3d89594a1a7d537b6b3112bae31fee22abb11135be",
+  "certificate_sha256": "f8b636d448f9cf2975e619ccb6fbd99b9693fd8d2c7f6b2878b69e7345139c72",
   "modules": 262,
   "vendor_boot_modules": 94,
   "signature_force": true,
@@ -20,6 +20,6 @@
     "modules.options": "082c058dd7ef254eab9fcbee0edc2fae3efca10aee91288a72afa3395e035b82",
     "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
   },
-  "signed_manifest_sha256": "6a89f3987fdb0cec4bfe101d61e77567c873f4d9047361f55bb36ae4f9a18e86",
-  "frozen_manifest_sha256": "e85c8492954b66260265fba9e0aebae1a50118b8b2bcf2fdf964ed3743b76ebf"
+  "signed_manifest_sha256": "f09602db9e8656b864809273f8df2b0cfbabc537ec86f828e61228895269ff2f",
+  "frozen_manifest_sha256": "2a09c8a531c59892f80c6e632d83a8f3c626f7c5708fe72ee514e414b15e57dc"
 }

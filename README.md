@@ -3,14 +3,18 @@
 Prebuilt kernel, DTB, DTBO and vendor modules for `device/nothing/Pong` with
 `TARGET_PONG_KERNEL := 6.18` (the default on its `pong-6.18` branch).
 
-The source-built 6.18.60 cohort described in `source.json` was imported after
-host validation of the full signed bank. On the development phone, the exact
-Image and module cohort booted Android with SELinux enforcing and signature
-checking forced; a data-interface-bound ping and three NDK camera preview/JPEG
-probes passed. The importer itself records `hardware_tested: false` because it
-performs no phone operation. This limited device result does not qualify every
-feature or another handset. See the source modules repository's runtime report
-for the remaining kernel warnings and userspace crashes.
+The coherent QRTR256 6.18.60 bank in `source.json` passed all 262 module
+ABI/signature checks and positive/negative admission tests in a diskless VM.
+On the development phone it booted the native November 1 Android 17 ROM with
+SELinux enforcing, forced signatures, root and full RAM. Native startup exposes
+41 sensors and five internal cameras. A normal-UID Camera2 test delivered four
+transient YUV frames from each public front/main camera. An Internet ping bound
+to rmnet_data2 passed, and Wi-Fi reconnected after that cellular-only test.
+The importer records `hardware_tested: false` because importing files performs
+no phone operation; the separate runtime result covers only this development
+phone. Overnight WLAN MHI wake stability remains open. See the module source
+repository's `docs/build-evidence/native-qrtr256-20261102.json` for exact inputs
+and limits. Earlier cohort evidence remains in Git history.
 
 **This is the development kernel of one phone.** It retains laboratory guards
 whose block-write ranges and RAM geometry are specific to that phone; another
