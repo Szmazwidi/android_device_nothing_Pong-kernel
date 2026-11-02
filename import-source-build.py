@@ -2,8 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 """Verify and import a complete source-built cohort into Pong-kernel, without a phone.
 
-Use --check-only first. The target's qualified DTB/DTBO and startup lists are
-preserved. A host import is never labelled hardware-tested and never flashes.
+Use --check-only first. The target's qualified DTB/DTBO are preserved. Startup lists
+are preserved for the legacy 262/94 reference; a reference with explicit
+expected_counts (e.g. CLG277: 193+84, 100 first-stage) requires --lists with the
+exact qualified modules.load / modules.load.vendor_boot / modules.list.vendor_boot,
+checked against the reference's first-stage list and its SHA-256.
+A host import is never labelled hardware-tested and never flashes.
 """
 import argparse,hashlib,json,pathlib,re,shutil,struct,subprocess,tempfile
 
@@ -15,21 +19,38 @@ def run(argv):
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ['kernel','signed','frozen','reference','source-tools','destination']:p.add_argument('--'+n,type=pathlib.Path,required=True)
+ p.add_argument('--lists',type=pathlib.Path,help='Directory with the qualified startup lists (required for an explicit-count reference)')
  p.add_argument('--check-only',action='store_true');a=p.parse_args()
  for n in ['kernel','signed','frozen','reference','source_tools','destination']:setattr(a,n,getattr(a,n).resolve())
  bank=json.loads((a.signed/'manifest.json').read_text());frozen=json.loads((a.frozen/'manifest.json').read_text());ref=json.loads(a.reference.read_text())
- expected=set(ref['vendor'])|set(ref['gki']);assert all(re.fullmatch(r'[A-Za-z0-9_.-]+\.ko',n)for n in expected);assert len(expected)==262 and set(bank['modules'])==set(frozen['modules'])==expected
+ expected=set(ref['vendor'])|set(ref['gki']);assert all(re.fullmatch(r'[A-Za-z0-9_.-]+\.ko',n)for n in expected)
+ counts=ref.get('expected_counts');LISTS=['modules.load','modules.load.vendor_boot','modules.list.vendor_boot']
+ if counts:
+  assert len(ref['vendor'])==counts['vendor'] and len(ref['gki'])==counts['gki'] and len(expected)==counts['total'],'Reference does not match its declared counts'
+  assert a.lists,'An explicit-count reference needs --lists';a.lists=a.lists.resolve()
+  first=a.source_tools.parent/ref['first_stage_list'];assert sha(first)==ref['first_stage_list_sha256'],'First-stage list hash mismatch'
+  first_names=first.read_text().split();assert len(first_names)==len(set(first_names))==counts['first_stage']
+  total,first_count=counts['total'],counts['first_stage']
+ else:
+  assert len(expected)==262 and not a.lists;total,first_count=262,94
+ assert set(bank['modules'])==set(frozen['modules'])==expected
  assert bank['final_ABI_verified']and bank['signature_force_config_verified']
  assert bank['final_kernel_sha256']==sha(a.kernel/'Image');image=(a.kernel/'Image').read_bytes();assert image[56:60]==b'ARMd'
  config=(a.kernel/'kernel_aarch64_dot_config').read_text();assert 'CONFIG_MODULE_SIG_FORCE=y'in config and'CONFIG_MODULE_SIG_SHA256=y'in config
  cert=a.signed/'signing-certificate.pem';der=run(['openssl','x509','-in',cert,'-outform','DER']);assert hashlib.sha256(der).hexdigest()==bank['certificate_sha256']and der in image
  target=a.destination;assert (target/'dtb/pong.dtb').is_file()and(target/'dtbo.img').is_file()
- vb=set((target/'modules.list.vendor_boot').read_text().split());assert len(vb)==94 and vb<=expected
+ src=a.lists if counts else target
+ vb=(src/'modules.list.vendor_boot').read_text().split();assert len(vb)==len(set(vb))==first_count and set(vb)<=expected
+ if counts:
+  assert vb==first_names,'modules.list.vendor_boot must equal the reference first-stage list'
+  load_vb=(src/'modules.load.vendor_boot').read_text().split();assert sorted(load_vb)==sorted(vb) and len(load_vb)==len(set(load_vb)),'First-stage load list must load exactly the first-stage set'
  for name in ['modules.load','modules.load.vendor_boot','modules.load.recovery']:
-  for l in(target/name).read_text().splitlines():
+  for l in((src if name in LISTS else target)/name).read_text().splitlines():
    l=l.strip()
    if l and not l.startswith('#'):assert l.split()[0].removesuffix('.ko')+'.ko'in expected,(name,l)
- meta={n:sha(target/n)for n in ['dtb/pong.dtb','dtbo.img','modules.load','modules.load.vendor_boot','modules.load.recovery','modules.list.vendor_boot','modules.options','modules.blocklist']}
+ preserved=['dtb/pong.dtb','dtbo.img','modules.load.recovery','modules.options','modules.blocklist']+([] if counts else LISTS)
+ meta={n:sha(target/n)for n in preserved}
+ new_lists={n:sha(a.lists/n)for n in LISTS} if counts else {}
  with tempfile.TemporaryDirectory(prefix='pong-source-import-')as tmp:
   tmp=pathlib.Path(tmp);k=tmp/'kernel';v=tmp/'vendor';k.mkdir();v.mkdir();magic=b'~Module signature appended~\n'
   for name in ['Image','kernel_aarch64_dot_config','kernel_aarch64_Module.symvers','Module.symvers']:
@@ -43,22 +64,24 @@ def main():
    run(['openssl','cms','-verify','-binary','-inform','DER','-in',tmp/'signature','-content',tmp/'body','-nointern','-certfile',cert,'-CAfile',cert,'-purpose','any','-out','/dev/null'])
    ((k if name in ref['gki']else v)/name).symlink_to(f)
   run(['python3',a.source_tools/'verify_build.py','--kernel',k,'--modules',v,'--reference',a.reference,'--report',tmp/'ABI.json'])
-  checked=json.loads((tmp/'ABI.json').read_text());assert checked['selected_modules']==262
- result=dict(schema='pong-source-prebuilt-v1',status='SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED',kernel=dict(sha256=bank['final_kernel_sha256']),certificate_sha256=bank['certificate_sha256'],modules=262,vendor_boot_modules=94,signature_force=True,hardware_tested=False,phone_operations=0,preserved_files=meta,signed_manifest_sha256=sha(a.signed/'manifest.json'),frozen_manifest_sha256=sha(a.frozen/'manifest.json'))
+  checked=json.loads((tmp/'ABI.json').read_text());assert checked['selected_modules']==total
+ result=dict(schema='pong-source-prebuilt-v1',status='SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED',kernel=dict(sha256=bank['final_kernel_sha256']),certificate_sha256=bank['certificate_sha256'],modules=total,vendor_boot_modules=first_count,reference=ref.get('reference','legacy-262'),kernel_profile=ref.get('kernel_profile'),imported_lists=new_lists,signature_force=True,hardware_tested=False,phone_operations=0,preserved_files=meta,signed_manifest_sha256=sha(a.signed/'manifest.json'),frozen_manifest_sha256=sha(a.frozen/'manifest.json'))
  if a.check_only:print(json.dumps(result));return
  # All validation precedes the first overwrite. Retain the Git/LFS history of
  # this prebuilt checkout and refuse to mix someone else's pending edits.
  assert not run(['git','-C',target,'status','--porcelain']).strip(),'Target has uncommitted changes'
- tracked={x for x in run(['git','-C',target,'ls-files','modules/*.ko']).decode().splitlines()};assert tracked=={'modules/'+n for n in expected}
+ tracked={x for x in run(['git','-C',target,'ls-files','modules/*.ko']).decode().splitlines()}
+ assert tracked=={'modules/'+n for n in expected} if not counts else tracked<={'modules/'+n for n in expected},'Tracked modules outside the reference'
+ for n in new_lists:shutil.copyfile(a.lists/n,target/n)
  for name in sorted(expected):shutil.copyfile(a.signed/name,target/'modules'/name)
  shutil.copyfile(a.kernel/'Image',target/'Image');shutil.copyfile(cert,target/'signing-certificate.pem')
  (target/'source.json').write_text(json.dumps(result,indent=2)+'\n')
- assert all(sha(target/n)==h for n,h in meta.items())
+ assert all(sha(target/n)==h for n,h in meta.items()) and all(sha(target/n)==h for n,h in new_lists.items())
  # Cover the actual build inputs and metadata. Source/documentation scripts
  # are reviewed as Git source and do not belong to the binary artifact bank.
- files=[target/'Image',target/'dtb/pong.dtb',target/'dtbo.img',target/'source.json',target/'signing-certificate.pem']+[target/'modules'/n for n in sorted(expected)]+[target/n for n in meta if not n.startswith('dtb/')and n!='dtbo.img']
+ files=[target/'Image',target/'dtb/pong.dtb',target/'dtbo.img',target/'source.json',target/'signing-certificate.pem']+[target/'modules'/n for n in sorted(expected)]+[target/n for n in list(meta)+list(new_lists) if not n.startswith('dtb/')and n!='dtbo.img']
  files=sorted(set(files),key=lambda q:str(q.relative_to(target)))
  (target/'SHA256SUMS').write_text(''.join(sha(f)+'  '+str(f.relative_to(target))+'\n'for f in files))
  subprocess.run(['sha256sum','-c','SHA256SUMS'],cwd=target,check=True,stdout=subprocess.DEVNULL)
- print(json.dumps(dict(status='SOURCE_BANK_IMPORTED_WITH_QUALIFIED_DTB_AND_LISTS_PRESERVED',files=len(files),hardware_tested=False,phone_operations=0)))
+ print(json.dumps(dict(status='SOURCE_BANK_IMPORTED_WITH_QUALIFIED_DTB'+('_AND_EXPLICIT_LISTS' if counts else '_AND_LISTS_PRESERVED'),files=len(files),hardware_tested=False,phone_operations=0)))
 if __name__=='__main__':main()
