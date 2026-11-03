@@ -107,3 +107,8 @@ cpu_hotplug.ko
 thermal_pause.ko
 ddr_cdev.ko
 bcl_pmic5.ko
+qcom_stats.ko
+subsystem_sleep_stats.ko
+qcom_cpuss_sleep_stats.ko
+smp2p_sleepstate.ko
+memshare.ko

@@ -3,13 +3,18 @@
 Prebuilt kernel, DTB, DTBO and vendor modules for `device/nothing/Pong` with
 `TARGET_PONG_KERNEL := 6.18` (the default on its `pong-6.18` branch).
 
-The current bank in `source.json` is the CLG277 cohort (2 Nov 2026): the QRTR256
-6.18.60 bank plus 15 platform ports — Qualcomm DCVS (memlat/bwmon/L3/DDR-LLCC
-fast path, PMU), the Gunyah apps watchdog, the msm_rng hwrng, QTI thermal
-cooling/sensors over QMI, CPU hotplug and hotplug-based thermal-pause, DDR cooling
-and BCL. 277 modules (193 vendor + 84 GKI), 100 of them first-stage; the kernel
-is the LAB profile (`CONFIG_PONG_LAB_GUARDS=y`, kernel commit 58b289d57). These
-are byte-identical to the images running on the development phone (stage 1412).
+The current bank in `source.json` is the CLG25 cohort (3 Nov 2026): 292 modules
+(208 vendor + 84 GKI), 100 of them first-stage, on the LAB-profile 6.18.60 kernel
+(`CONFIG_PONG_LAB_GUARDS=y`). Over CLG277 it adds the sleep-statistics drivers
+(qcom_stats, subsystem/cpuss sleep stats, smp2p sleepstate), memshare, UCSI v3
+(shipped, not started), the ufs-qcom lane-clock fix (one leaked CXO vote per
+resume), pci-msm without ASPM L0s, the msm_drm UBWC version fix (UBWC colours are
+correct with `vendor.gralloc.disable_ubwc=0`), the slimbus NGD late-QMI retry and
+nine modules derived from redducc's 6.12 port: Nothing's hardware_id, secure_state,
+slot_status, simulated_ntc, secure_element, bootloader_log and task_meminfo, the
+PowerStats nodes (soc_sleep_stats) and rq_stats. The nine are shipped but not in
+`modules.load`; the device tree loads them after boot. Image and all modules are
+byte-identical to the images running on the development phone (stage CLG25).
 Watchdog behaviour across long suspend and thermal mitigation under real heat
 are not yet qualified. The earlier QRTR256 bank passed all 262 module
 ABI/signature checks and positive/negative admission tests in a diskless VM.
