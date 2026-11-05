@@ -3,18 +3,17 @@
 Prebuilt kernel, DTB, DTBO and vendor modules for `device/nothing/Pong` with
 `TARGET_PONG_KERNEL := 6.18` (the default on its `pong-6.18` branch).
 
-The current bank in `source.json` is the CLG25 cohort (3 Nov 2026): 292 modules
-(208 vendor + 84 GKI), 100 of them first-stage, on the LAB-profile 6.18.60 kernel
-(`CONFIG_PONG_LAB_GUARDS=y`). Over CLG277 it adds the sleep-statistics drivers
-(qcom_stats, subsystem/cpuss sleep stats, smp2p sleepstate), memshare, UCSI v3
-(shipped, not started), the ufs-qcom lane-clock fix (one leaked CXO vote per
-resume), pci-msm without ASPM L0s, the msm_drm UBWC version fix (UBWC colours are
-correct with `vendor.gralloc.disable_ubwc=0`), the slimbus NGD late-QMI retry and
-nine modules derived from redducc's 6.12 port: Nothing's hardware_id, secure_state,
-slot_status, simulated_ntc, secure_element, bootloader_log and task_meminfo, the
-PowerStats nodes (soc_sleep_stats) and rq_stats. The nine are shipped but not in
-`modules.load`; the device tree loads them after boot. Image and all modules are
-byte-identical to the images running on the development phone (stage CLG25).
+The current bank in `source.json` is stage 1454 (5 Nov 2026): 293 modules (209 vendor
++ 84 GKI), 100 of them first-stage, on the LAB-profile 6.18.60 kernel
+(`CONFIG_PONG_LAB_GUARDS=y`). Over CLG25 it adds the working PCIe DRV suspend for
+Wi-Fi (PIPE clocks kept across the DRV hand-off; `pong_disable_drv=0` in
+`modules.options`), microphone capture (SoundWire regmap without the private regmap
+layout, 6.12 port-type translation), hardware video encoding (VIDC buffer fixes and
+the secure-non-pixel heap), USB power-down in suspend, sys_pm_vx and the IOMMU fault
+handler registration fix. Nine modules derived from redducc's 6.12 port are shipped
+but not in `modules.load`; the device tree loads them after boot. Image and all
+modules are byte-identical to the images running on the development phone (stage 1454).
+CX shutdown (CXSD) is not reached yet: boot-held GCC clocks are a known open problem.
 Watchdog behaviour across long suspend and thermal mitigation under real heat
 are not yet qualified. The earlier QRTR256 bank passed all 262 module
 ABI/signature checks and positive/negative admission tests in a diskless VM.

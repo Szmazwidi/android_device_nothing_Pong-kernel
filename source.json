@@ -2,15 +2,15 @@
   "schema": "pong-source-prebuilt-v1",
   "status": "SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED",
   "kernel": {
-    "sha256": "976dabbd64c1498b6cd156bcba8f2cd091e285a6e5b8bfa06eef41ce77faba7f"
+    "sha256": "36bc6afe7e5793523fed5105403c30e72c4f92b21b75c4d3bfe5c91ddc6cc4aa"
   },
-  "certificate_sha256": "d6724dc0aab8da01ea84ddf10be8ae2bfb4ec258cf801bc3ac55f88e01e31fcd",
-  "modules": 292,
+  "certificate_sha256": "8d18ef2372526d8721b1213a026725f77c35a00bf313eeaeadfe67d6456b15d0",
+  "modules": 293,
   "vendor_boot_modules": 100,
-  "reference": "CLG25_292",
+  "reference": "1454_293",
   "kernel_profile": "lab",
   "imported_lists": {
-    "modules.load": "87700a4c25dd1f99c3e979d448e3fe73e9ff89ba1e99a52474d6e05724bcef65",
+    "modules.load": "5dc36a7b2f1df13b1f7eb566b237ebc999169f28b229180a06ca5cd3150d9198",
     "modules.load.vendor_boot": "668e582d72faa49eaa84f904c651de898dba85d8295beb0d11b846e951e05f3a",
     "modules.list.vendor_boot": "9f25cdb056b180e257543fa5e97aa97a6e87823677fd54d35f86a45a61ea5356"
   },
@@ -24,6 +24,6 @@
     "modules.options": "082c058dd7ef254eab9fcbee0edc2fae3efca10aee91288a72afa3395e035b82",
     "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
   },
-  "signed_manifest_sha256": "957a4d8f29735bfc1543c8286b4589653022f4a28eb0fef6f650bb012dc37c67",
-  "frozen_manifest_sha256": "1afcfef458d744072a2200e5f1f6c26c05cbf0da1684600db9dc482be5361ebb"
+  "signed_manifest_sha256": "1ef03784fa6d024c6453697771b57fff7cc3a54c933a358aac5e6bc15526951c",
+  "frozen_manifest_sha256": "2045a61ea4701e520b2358eb170511ccb21b63796331a18418f1c2fb067b7592"
 }

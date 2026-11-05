@@ -112,3 +112,4 @@ subsystem_sleep_stats.ko
 qcom_cpuss_sleep_stats.ko
 smp2p_sleepstate.ko
 memshare.ko
+sys_pm_vx.ko
