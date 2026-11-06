@@ -2,9 +2,9 @@
   "schema": "pong-source-prebuilt-v1",
   "status": "SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED",
   "kernel": {
-    "sha256": "36bc6afe7e5793523fed5105403c30e72c4f92b21b75c4d3bfe5c91ddc6cc4aa"
+    "sha256": "47c4bca3053cc9d571dd550632a5e014a27f6690bebb4b85c8f37267c73981cc"
   },
-  "certificate_sha256": "8d18ef2372526d8721b1213a026725f77c35a00bf313eeaeadfe67d6456b15d0",
+  "certificate_sha256": "89c3bf7368c605609f060e16bf355de839cb59a983d99e70b022027453240ffc",
   "modules": 293,
   "vendor_boot_modules": 100,
   "reference": "1454_293",
@@ -21,9 +21,9 @@
     "dtb/pong.dtb": "1c0406c6a47adb196b2136a9179917430611491d82e5a84ee577436240a118ed",
     "dtbo.img": "4fd6034c192cad4804b98e2f884cc5cfadf68c8a010d1065ab07901e3e3faeee",
     "modules.load.recovery": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
-    "modules.options": "082c058dd7ef254eab9fcbee0edc2fae3efca10aee91288a72afa3395e035b82",
+    "modules.options": "ffa657466d2fa1a009a2932cc8a78a1b0e05512b12e8baf29fded48838e16341",
     "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
   },
-  "signed_manifest_sha256": "1ef03784fa6d024c6453697771b57fff7cc3a54c933a358aac5e6bc15526951c",
-  "frozen_manifest_sha256": "2045a61ea4701e520b2358eb170511ccb21b63796331a18418f1c2fb067b7592"
+  "signed_manifest_sha256": "2d95244c56cbf8621eb46a64529c00da26576568ea630399d0ee43ad02b673a2",
+  "frozen_manifest_sha256": "31b2f9b589b1bc89a377a12564622c024f8570fccc6d2b831131b67a37185242"
 }
