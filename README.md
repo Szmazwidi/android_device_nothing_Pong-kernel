@@ -3,7 +3,7 @@
 Prebuilt kernel, DTB, DTBO and vendor modules for `device/nothing/Pong` with
 `TARGET_PONG_KERNEL := 6.18` (the default on its `pong-6.18` branch).
 
-The current bank in `source.json` is stage 1454 (5 Nov 2026): 293 modules (209 vendor
+This branch carries candidate CLG43 (6 Nov 2026): stage 1454 plus GCC and GPUCC sync_state, USB without a left-asserted BCR, the UFS GDSC kept on in suspend, dispcc votes released in system suspend and the PowerStats record fix. CX shutdown was reached on the phone with CLG42; CLG43 itself has not run on hardware. Over stage 1454 (5 Nov 2026), which this list describes: 293 modules (209 vendor
 + 84 GKI), 100 of them first-stage, on the LAB-profile 6.18.60 kernel
 (`CONFIG_PONG_LAB_GUARDS=y`). Over CLG25 it adds the working PCIe DRV suspend for
 Wi-Fi (PIPE clocks kept across the DRV hand-off; `pong_disable_drv=0` in
