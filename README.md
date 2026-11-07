@@ -7,7 +7,7 @@ This branch carries candidate CLG43 (6 Nov 2026): stage 1454 plus GCC and GPUCC 
 + 84 GKI), 100 of them first-stage, on the LAB-profile 6.18.60 kernel
 (`CONFIG_PONG_LAB_GUARDS=y`). Over CLG25 it adds the working PCIe DRV suspend for
 Wi-Fi (PIPE clocks kept across the DRV hand-off; `pong_disable_drv=0` in
-`modules.options`), microphone capture (SoundWire regmap without the private regmap
+`modules.options`; CLG43 adds `pong_disable_cbc=0` on the same line, since libmodprobe reads only the first `options` line of a module), microphone capture (SoundWire regmap without the private regmap
 layout, 6.12 port-type translation), hardware video encoding (VIDC buffer fixes and
 the secure-non-pixel heap), USB power-down in suspend, sys_pm_vx and the IOMMU fault
 handler registration fix. Nine modules derived from redducc's 6.12 port are shipped
