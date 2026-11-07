@@ -28,9 +28,15 @@ signature enforcement, valid trusted modules and rejection of unsigned,
 unknown-key and damaged signatures. Separate LAB regression checks retain
 immutable-payload rejection.
 
-These are host results. Record full ROM boot, user-data compatibility,
-recovery, physical peripherals and other RAM/UFS variants separately. The
-previous CLG43 LAB component qualification belongs to its earlier image hashes.
+The [2026-11-07 native ROM qualification](https://github.com/Szmazwidi/android_device_nothing_Pong/blob/6bc47b0c532e286aaeaf7e5a8d36e0f723eb83d1/manifests/community-clg43/qualification.json)
+records a successful nine-image update with personal data, an unmodified
+unrooted source RAM boot, and a return to the persistent rooted image on one
+EEA 12 GB / 256 GB Pong. Physical display/touch/fingerprint, microphone,
+front/rear video and cellular checks passed. Complete signed OTA/recovery,
+release-key migration, fresh installation, untethered suspend and other
+hardware variants remain open gates. The import manifests record build-time
+checks; runtime evidence is recorded separately. The previous LAB component
+qualification belongs to its earlier image hashes.
 
 ## Rebuild and import
 
