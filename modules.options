@@ -1,3 +1,3 @@
 options msm_drm dsi_display0=qcom,mdss_dsi_nt37705_visionox_amoled_120hz_cmd: panel_id=110000
 
-options cnss2 pong_disable_drv=0 pong_disable_cbc=0
+options cnss2 pong_disable_drv=0
