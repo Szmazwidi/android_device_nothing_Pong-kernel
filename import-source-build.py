@@ -37,6 +37,8 @@ def main():
  assert bank['final_ABI_verified']and bank['signature_force_config_verified']
  assert bank['final_kernel_sha256']==sha(a.kernel/'Image');image=(a.kernel/'Image').read_bytes();assert image[56:60]==b'ARMd'
  config=(a.kernel/'kernel_aarch64_dot_config').read_text();assert 'CONFIG_MODULE_SIG_FORCE=y'in config and'CONFIG_MODULE_SIG_SHA256=y'in config
+ community=ref.get('kernel_profile')=='community'
+ if community:assert 'CONFIG_PONG_LAB_GUARDS=y'not in config and bank.get('kernel_profile')=='community','Community import must match the explicit community kernel and signed bank'
  cert=a.signed/'signing-certificate.pem';der=run(['openssl','x509','-in',cert,'-outform','DER']);assert hashlib.sha256(der).hexdigest()==bank['certificate_sha256']and der in image
  target=a.destination;assert (target/'dtb/pong.dtb').is_file()and(target/'dtbo.img').is_file()
  src=a.lists if counts else target
@@ -59,7 +61,7 @@ def main():
    f=a.signed/name;assert sha(f)==row['sha256'];data=f.read_bytes();assert data.endswith(magic)
    n=struct.unpack('>I',data[-len(magic)-4:-len(magic)])[0];end=len(data)-len(magic)-12-n;assert end>0
    body=data[:end];signature=data[end:end+n];assert hashlib.sha256(body).hexdigest()==frozen['modules'][name]['payload_sha256']and len(body)==frozen['modules'][name]['payload_bytes']
-   assert struct.pack('<Q',len(body))+hashlib.sha256(body).digest()in image, 'Final kernel lacks frozen payload entry: '+name
+   if not community:assert struct.pack('<Q',len(body))+hashlib.sha256(body).digest()in image, 'Final kernel lacks frozen payload entry: '+name
    (tmp/'body').write_bytes(body);(tmp/'signature').write_bytes(signature)
    run(['openssl','cms','-verify','-binary','-inform','DER','-in',tmp/'signature','-content',tmp/'body','-nointern','-certfile',cert,'-CAfile',cert,'-purpose','any','-out','/dev/null'])
    ((k if name in ref['gki']else v)/name).symlink_to(f)
