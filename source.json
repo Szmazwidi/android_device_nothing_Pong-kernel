@@ -1,29 +1,30 @@
 {
-  "schema": "pong-source-prebuilt-v1",
-  "status": "SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED",
-  "kernel": {
-    "sha256": "c6a70ae3ff9ce6042b9a52c6d0548759ca4df6236a9aa5e3a8e4a6b3459a103d"
-  },
-  "certificate_sha256": "d54181268267557fc5317f7ac4dbcaf527f97179c4f7f3f157dc2b354cbf9e9a",
-  "modules": 293,
-  "vendor_boot_modules": 100,
-  "reference": "CLG43_293_community",
-  "kernel_profile": "community",
-  "imported_lists": {
-    "modules.load": "5dc36a7b2f1df13b1f7eb566b237ebc999169f28b229180a06ca5cd3150d9198",
-    "modules.load.vendor_boot": "668e582d72faa49eaa84f904c651de898dba85d8295beb0d11b846e951e05f3a",
-    "modules.list.vendor_boot": "9f25cdb056b180e257543fa5e97aa97a6e87823677fd54d35f86a45a61ea5356"
-  },
-  "signature_force": true,
-  "hardware_tested": false,
-  "phone_operations": 0,
-  "preserved_files": {
-    "dtb/pong.dtb": "1c0406c6a47adb196b2136a9179917430611491d82e5a84ee577436240a118ed",
-    "dtbo.img": "6e2f6a81b0b396588dc23621b5d901b73b6a49640526494033d24b1bbe869da8",
-    "modules.load.recovery": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
-    "modules.options": "ffa657466d2fa1a009a2932cc8a78a1b0e05512b12e8baf29fded48838e16341",
-    "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
-  },
-  "signed_manifest_sha256": "df3759bba02e68920ee62e8ea2c71c21c9b315b979990124541d871f987daca6",
-  "frozen_manifest_sha256": "8ac5c20e0dce1ee6d6066902533e3b04f2cc364b9933b2fe6812029905e59b32"
+ "schema": "pong-source-prebuilt-v1",
+ "status": "SOURCE_BANK_CERTIFICATE_CMS_AND_FINAL_ABI_VERIFIED",
+ "kernel": {
+  "sha256": "c6a70ae3ff9ce6042b9a52c6d0548759ca4df6236a9aa5e3a8e4a6b3459a103d"
+ },
+ "certificate_sha256": "d54181268267557fc5317f7ac4dbcaf527f97179c4f7f3f157dc2b354cbf9e9a",
+ "modules": 293,
+ "vendor_boot_modules": 100,
+ "reference": "CLG43_293_community",
+ "kernel_profile": "community",
+ "imported_lists": {
+  "modules.load": "5dc36a7b2f1df13b1f7eb566b237ebc999169f28b229180a06ca5cd3150d9198",
+  "modules.load.vendor_boot": "668e582d72faa49eaa84f904c651de898dba85d8295beb0d11b846e951e05f3a",
+  "modules.list.vendor_boot": "9f25cdb056b180e257543fa5e97aa97a6e87823677fd54d35f86a45a61ea5356"
+ },
+ "signature_force": true,
+ "hardware_tested": false,
+ "phone_operations": 0,
+ "preserved_files": {
+  "dtb/pong.dtb": "4e49828519c846f7b6ea932a94ef6b64024542c63586105514ed02eca914efd3",
+  "dtbo.img": "6e2f6a81b0b396588dc23621b5d901b73b6a49640526494033d24b1bbe869da8",
+  "modules.load.recovery": "cb02d30f6c19a589c49d6d6f74208f762d7c2bc3b8768e9aba3f1ea805235ea0",
+  "modules.options": "ffa657466d2fa1a009a2932cc8a78a1b0e05512b12e8baf29fded48838e16341",
+  "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
+ },
+ "signed_manifest_sha256": "df3759bba02e68920ee62e8ea2c71c21c9b315b979990124541d871f987daca6",
+ "frozen_manifest_sha256": "8ac5c20e0dce1ee6d6066902533e3b04f2cc364b9933b2fe6812029905e59b32",
+ "dtb_note": "CLG74: base DTB cpu-map flattened to one cluster (fdtput); see git log"
 }
