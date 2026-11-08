@@ -24,6 +24,6 @@
     "modules.options": "ffa657466d2fa1a009a2932cc8a78a1b0e05512b12e8baf29fded48838e16341",
     "modules.blocklist": "1903d7ffc3698e1792287441c14e5cbdc12797b5ce3367a7204f552d8fbc3c55"
   },
-  "signed_manifest_sha256": "2592fea24ca19bea788f67bb6453f126310574097d7a77fa147fdb5f42cb25ac",
-  "frozen_manifest_sha256": "31e48df4b2ad7ab9416df63d42e9949a408dc4f7018cbcbf3bb4aa143a1b8081"
+  "signed_manifest_sha256": "df3759bba02e68920ee62e8ea2c71c21c9b315b979990124541d871f987daca6",
+  "frozen_manifest_sha256": "8ac5c20e0dce1ee6d6066902533e3b04f2cc364b9933b2fe6812029905e59b32"
 }
